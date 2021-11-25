@@ -29,7 +29,7 @@ api.interceptors.request.use(async (config: AxiosRequestConfig) => {
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    //handle refresh token for OAuth 2.0
+    //TODO: handle refresh token for OAuth 2.0
     return Promise.reject(error.response?.data.error);
   }
 );

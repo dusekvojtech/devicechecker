@@ -10,6 +10,20 @@ export type StorageUserData = {
   token: string;
 };
 
+export type Device = {
+  id: string;
+  code: string;
+  image?: string;
+  model: string;
+  os: 'ANDROID' | 'IOS' | 'WINDOWS';
+  osVersion?: string;
+  vendor: string;
+  borrowed?: {
+    user: User;
+    date: string;
+  };
+};
+
 export const handleLogin = async (login: string, password: string) => {
   try {
     const res: AxiosResponse<User> = await axios.post(endpoints.LOGIN, {
@@ -43,4 +57,68 @@ export const getUser = async () => {
 
 export const handleLogout = () => {
   localStorage.removeItem('@userData');
+};
+
+export const getDevices = async () => {
+  try {
+    const res: AxiosResponse<[Device]> = await axios.get(endpoints.DEVICES);
+    const { data } = res;
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const createDevice = async (
+  code: string,
+  os: string,
+  vendor: string,
+  model: string,
+  osVersion: string,
+  image?: string
+) => {
+  try {
+    const res: AxiosResponse<Device> = await axios.post(endpoints.DEVICES, {
+      code,
+      os,
+      vendor,
+      model,
+      osVersion,
+      image,
+    });
+    const { data } = res;
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const bookDevice = async (userId: string, deviceId: string) => {
+  try {
+    const res: AxiosResponse<Device> = await axios.post(
+      `${endpoints.DEVICES}/${deviceId}${endpoints.BOOK_DEVICE}`,
+      {
+        id: userId,
+      }
+    );
+    const { data } = res;
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const returnDevice = async (userId: string, deviceId: string) => {
+  try {
+    const res: AxiosResponse<Device> = await axios.post(
+      `${endpoints.DEVICES}/${deviceId}${endpoints.RETURN_DEVICE}`,
+      {
+        id: userId,
+      }
+    );
+    const { data } = res;
+    return data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };

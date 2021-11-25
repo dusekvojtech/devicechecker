@@ -6,20 +6,21 @@ import './App.css';
 
 const App: FC = () => {
   return (
-    <div>
-      <RecoilRoot>
-        <Nav />
-        <div className="jumbotron main-wrapper">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 offset-md-3">
-                <Routing />
-              </div>
-            </div>
+    <RecoilRoot>
+      <Nav />
+      <main role="main" className="bg-light py-5">
+        <div className="container py-5">
+          <div className="d-flex justify-content-center">
+            <Routing />
           </div>
         </div>
-      </RecoilRoot>
-    </div>
+      </main>
+      <footer className="text-muted py-3">
+        <div className="container text-center">
+          <p> © DeviceChecker</p>
+        </div>
+      </footer>
+    </RecoilRoot>
   );
 };
 

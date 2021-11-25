@@ -11,7 +11,7 @@ const Login: FC = () => {
   const [, setUser] = useRecoilState(userAtom);
   const [loaded] = useRecoilState(loadedApp);
   return loaded ? (
-    <div>
+    <div className="col-md-4 justify-content-center">
       <h2>Login</h2>
       <Formik
         initialValues={{
@@ -19,7 +19,7 @@ const Login: FC = () => {
           password: 'wh1tew1zard',
         }}
         validationSchema={Yup.object().shape({
-          username: Yup.string().required('Username is required'),
+          username: Yup.string().required('Email is required'),
           password: Yup.string().required('Password is required'),
         })}
         onSubmit={({ username, password }, { setStatus, setSubmitting }) => {
@@ -43,7 +43,9 @@ const Login: FC = () => {
               <label htmlFor="username">Username</label>
               <Field
                 name="username"
+                placeholder="Email"
                 type="text"
+                disabled={isSubmitting}
                 className={
                   'form-control' + (errors.username && touched.username ? ' is-invalid' : '')
                 }
@@ -54,7 +56,9 @@ const Login: FC = () => {
               <label htmlFor="password">Password</label>
               <Field
                 name="password"
+                placeholder="Password"
                 type="password"
+                disabled={isSubmitting}
                 className={
                   'form-control' + (errors.password && touched.password ? ' is-invalid' : '')
                 }
