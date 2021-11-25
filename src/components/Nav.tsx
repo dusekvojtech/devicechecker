@@ -11,37 +11,32 @@ import userAtom from '../atoms/user';
 const Navigation: FC = () => {
   const [user, setUser] = useRecoilState(userAtom);
   return (
-    <div>
-      <nav
-        className="navbar navbar-expand navbar-dark bg-dark"
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%' }}
-      >
-        <div className="navbar-nav">
-          <h1 className=" navbar-brand">Device Checker</h1>
-          {user?.id && (
-            <NavLink to={ROUTES.List} className="nav-item nav-link">
-              List
-            </NavLink>
-          )}
-          {user?.type === ROLE.Admin && (
-            <NavLink to={ROUTES.Create} className="nav-item nav-link">
-              Create
-            </NavLink>
-          )}
-          {user?.id && (
-            <a
-              onClick={() => {
-                setUser(null);
-                handleLogout();
-              }}
-              className="nav-item nav-link"
-            >
-              Logout
-            </a>
-          )}
-        </div>
-      </nav>
-    </div>
+    <nav className="navbar navbar-expand navbar-dark fixed-top bg-dark">
+      <div className="navbar-nav container">
+        <h1 className="navbar-brand mb-0">Device Checker</h1>
+        {user?.id && (
+          <NavLink to={ROUTES.List} className="nav-item nav-link">
+            List
+          </NavLink>
+        )}
+        {user?.type === ROLE.Admin && (
+          <NavLink to={ROUTES.Create} className="nav-item nav-link">
+            Create
+          </NavLink>
+        )}
+        {user?.id && (
+          <a
+            onClick={() => {
+              setUser(null);
+              handleLogout();
+            }}
+            className="nav-item nav-link ml-auto btn btn-outline-secondary p-1"
+          >
+            Logout
+          </a>
+        )}
+      </div>
+    </nav>
   );
 };
 

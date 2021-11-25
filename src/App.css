@@ -1,17 +1,7 @@
 html,
-body {
-  height: 100%;
-}
-
-.main-wrapper {
-  padding-top: 100px;
-  height: 100vh;
-}
-
-h1 {
-  margin-bottom: 0;
-}
-
-a {
-  cursor: pointer;
+body,
+#root,
+#root > div,
+main {
+  min-height: 900px;
 }
